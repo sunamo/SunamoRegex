@@ -101,7 +101,7 @@ public static class RegexHelper
             return false;
         }
 
-        bool result = BTSSE.IsLong(innerText);
+        bool result = long.TryParse(innerText, out var ol);
         if (result)
         {
             lastTelephone = (wasPlus ? "+" : "") + innerText;
