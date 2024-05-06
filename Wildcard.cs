@@ -33,6 +33,6 @@ public class Wildcard : Regex
     /// <returns>A regex equivalent of the given wildcard.</returns>
     public static string WildcardToRegex(string pattern)
     {
-        return "^" + Regex.Escape(pattern).Replace("\\*", ".*").Replace("\\?", AllStringsSE.dot) + "$";
+        return "^" + Regex.Escape(pattern).Replace("\\*", ".*").Replace("\\?", AllStrings.dot) + "$";
     }
 }
