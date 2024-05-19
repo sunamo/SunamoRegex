@@ -1,4 +1,10 @@
-namespace SunamoRegex;
+namespace
+#if SunamoDevCode
+SunamoDevCode
+#else
+SunamoRegex
+#endif
+;
 
 /// <summary>
 /// Represents a wildcard running on the
