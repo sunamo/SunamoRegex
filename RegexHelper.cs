@@ -1,5 +1,15 @@
-namespace SunamoRegex;
-
+using System.Text.RegularExpressions;
+namespace
+#if SunamoHtml
+SunamoHtml
+#elif SunamoWikipedia
+SunamoWikipedia
+#elif SunamoYouTube
+SunamoYouTube
+#else
+SunamoRegex
+#endif
+;
 /// <summary>
 /// Most NotTranslateAble class due to many regex and duplicated \
 /// </summary>
@@ -9,20 +19,17 @@ public static class RegexHelper
     public static Regex rHtmlComment = new Regex(@"<!--[^>]*>[\s\S]*?-->", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     public static Regex rYtVideoLink = new Regex("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", RegexOptions.Compiled);
     public static Regex rBrTagCaseInsensitive = new Regex(@"<br\s*/?>");
-
     public static bool IsEmail(string email)
     {
         Regex r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         return r.IsMatch(email);
     }
-
     public static Regex rUri = new Regex(@"(https?://[^\s]+)");
     //static Regex rUriOnlyOutsideTags = new Regex("https?:\/\/[^\s]*|<\/?\w+\b(?=\s|>)(?:='[^']*'|="[^ "]*" |=[^ '"][^\s>]*|[^>])*>|\&nbsp;John|(John)/gi");
     //static Regex rUriOnlyOutsideTags = new Regex("(text|simple)(?![^<]*>|[^<>]*</)");
     // cant compile
     //static Regex rHtmlTag = new Regex(@"(?<==)["']?((?:.(?!["']?\\s+(?:\S+)=|[>"']))+.)["']?");
     public static Regex rHtmlTag = new Regex("<\\s*([A-Za-z])*?[^>]*/?>");
-
     public static Regex rgColor6 = new Regex(@"^(?:[0-9a-fA-F]{3}){1,2}$");
     public static Regex rgColor8 = new Regex(@"^(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]){2}$");
     public static Regex rPreTagWithContent = new Regex(@"<\s*pre[^>]*>(.*?)<\s*/\s*pre>", RegexOptions.Multiline);
@@ -31,8 +38,6 @@ public static class RegexHelper
     public static Regex rWpImgThumbnail = new Regex(@"(https?:\/\/([^\s]+)-([0-9]*)x([0-9]*).jpg)");
     public static Regex rNonPairXmlTagsUnvalid = new Regex("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
     public static readonly Regex rWhitespace = new Regex(@"\s+");
-
-
     public static bool IsColor(string entry)
     {
         entry = entry.Trim().TrimStart('#');
@@ -46,12 +51,10 @@ public static class RegexHelper
         }
         return false;
     }
-
     public static bool IsYtVideoUri(string text)
     {
         return rYtVideoLink.IsMatch(text);
     }
-
     /// <summary>
     /// Dont use, parse uri with regex is total naive . Use DOM parser
     /// Not working - keep in plain text, use ReplacePlainUrlWithLinks2
@@ -65,12 +68,10 @@ public static class RegexHelper
         "<a href=\"$1\">$1</a>");
         return html;
     }
-
     public static bool IsUri(string text)
     {
         return rUri.IsMatch(text) && (text.StartsWith("http://") || text.StartsWith("https://"));
     }
-
     public static List<string> AllFromGroup(MatchCollection m, int v)
     {
         List<string> vr = new List<string>(m.Count);
@@ -80,13 +81,10 @@ public static class RegexHelper
         }
         return vr;
     }
-
     public static string lastTelephone = null;
-
     public static bool IsTelephone(string innerText)
     {
         lastTelephone = null;
-
         innerText = rWhitespace.Replace(innerText, string.Empty);
         bool wasPlus = false;
         if (innerText[0] == '+')
@@ -94,45 +92,35 @@ public static class RegexHelper
             wasPlus = true;
             innerText = innerText.Substring(1);
         }
-
         if (innerText.Length != 9 && innerText.Length != 12)
         {
-
             return false;
         }
-
         bool result = long.TryParse(innerText, out var ol);
         if (result)
         {
             lastTelephone = (wasPlus ? "+" : "") + innerText;
         }
-
         if (lastTelephone != null)
         {
             // sanitize to common format
             lastTelephone = SanitizePhone(lastTelephone);
         }
-
         return result;
     }
-
     public static string SanitizePhone(string s)
     {
         if (string.IsNullOrWhiteSpace(s))
         {
             return s;
         }
-
         s = s.Replace(" ", "");
-
         if (!s.StartsWith("+"))
         {
             s = "+420" + s;
         }
-
         return s;
     }
-
     static RegexHelper()
     {
         // this one I unfortunately cant use because I use .net core 2.0, available from 2.1

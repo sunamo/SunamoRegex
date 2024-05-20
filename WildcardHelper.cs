@@ -1,4 +1,10 @@
-namespace SunamoRegex;
+namespace
+#if SunamoStringReplace
+SunamoStringReplace
+#else
+SunamoRegex
+#endif
+;
 public class WildcardHelper
 {
     public static bool IsWildcard(string text)

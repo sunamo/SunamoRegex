@@ -1,11 +1,15 @@
+using System.Text.RegularExpressions;
 namespace
 #if SunamoDevCode
 SunamoDevCode
+#elif SunamoGetFolders
+SunamoGetFolders
+#elif SunamoStringReplace
+SunamoStringReplace
 #else
 SunamoRegex
 #endif
 ;
-
 /// <summary>
 /// Represents a wildcard running on the
 /// <see cref="System.Text.RegularExpressions"/> engine.
@@ -20,7 +24,6 @@ public class Wildcard : Regex
     : base(WildcardToRegex(pattern))
     {
     }
-
     /// <summary>
     /// Initializes a wildcard with the given search pattern and options.
     /// </summary>
@@ -31,7 +34,6 @@ public class Wildcard : Regex
     : base(WildcardToRegex(pattern), options)
     {
     }
-
     /// <summary>
     /// Converts a wildcard to a regex.
     /// </summary>
