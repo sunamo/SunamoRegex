@@ -1,6 +1,8 @@
 namespace
 #if SunamoStringReplace
 SunamoStringReplace
+#elif SunamoString
+SunamoString
 #else
 SunamoRegex
 #endif

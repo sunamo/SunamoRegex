@@ -6,6 +6,10 @@ SunamoDevCode
 SunamoGetFolders
 #elif SunamoStringReplace
 SunamoStringReplace
+#elif SunamoFileSystem
+SunamoFileSystem
+#elif SunamoString
+SunamoString
 #else
 SunamoRegex
 #endif
