@@ -1,3 +1,5 @@
+
+namespace SunamoRegex;
 public class WildcardHelper
 {
     public static bool IsWildcard(string text)

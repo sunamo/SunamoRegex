@@ -1,3 +1,5 @@
+
+namespace SunamoRegex;
 public class AllStrings
 {
     public const string dot = ".";

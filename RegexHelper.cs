@@ -1,3 +1,5 @@
+
+namespace SunamoRegex;
 using System.Text.RegularExpressions;
 /// <summary>
 /// Most NotTranslateAble class due to many regex and duplicated \

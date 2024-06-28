@@ -1,3 +1,5 @@
+
+namespace SunamoRegex;
 using System.Text.RegularExpressions;
 /// <summary>
 /// Represents a wildcard running on the
