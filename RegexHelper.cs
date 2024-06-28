@@ -1,15 +1,4 @@
 using System.Text.RegularExpressions;
-namespace
-#if SunamoHtml
-SunamoHtml
-#elif SunamoWikipedia
-SunamoWikipedia
-#elif SunamoYouTube
-SunamoYouTube
-#else
-SunamoRegex
-#endif
-;
 /// <summary>
 /// Most NotTranslateAble class due to many regex and duplicated \
 /// </summary>

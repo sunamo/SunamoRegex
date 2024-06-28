@@ -1,19 +1,4 @@
 using System.Text.RegularExpressions;
-namespace
-#if SunamoDevCode
-SunamoDevCode
-#elif SunamoGetFolders
-SunamoGetFolders
-#elif SunamoStringReplace
-SunamoStringReplace
-#elif SunamoFileSystem
-SunamoFileSystem
-#elif SunamoString
-SunamoString
-#else
-SunamoRegex
-#endif
-;
 /// <summary>
 /// Represents a wildcard running on the
 /// <see cref="System.Text.RegularExpressions"/> engine.
