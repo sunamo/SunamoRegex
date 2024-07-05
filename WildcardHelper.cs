@@ -1,4 +1,3 @@
-
 namespace SunamoRegex;
 public class WildcardHelper
 {
