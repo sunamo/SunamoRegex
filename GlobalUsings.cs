@@ -1,12 +1,16 @@
 global using System.Collections.Generic;
 global using System.Linq;
-
 global using System.Text.RegularExpressions;
 global using System.Text;
 global using System.Collections.Generic;
 global using System.Collections;
 global using System.IO;
-
 global using System;
 global using System.Diagnostics.CodeAnalysis;
 global using System.Reflection;
+global using SunamoRegex;
+global using SunamoRegex._sunamo.SunamoStringGetLines;
+global using SunamoRegex._sunamo.SunamoValues;
+global using SunamoRegex._sunamo.SunamoXlfKeys;
+global using SunamoRegex._sunamo.SunamoExceptions.OnlyInSE;
+global using SunamoRegex._sunamo.SunamoExceptions._AddedToAllCsproj;

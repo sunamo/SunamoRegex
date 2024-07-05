@@ -1,4 +1,4 @@
-namespace SunamoRegex;
+namespace SunamoRegex._sunamo.SunamoValues;
 
 
 
