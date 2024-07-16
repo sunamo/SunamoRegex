@@ -1,4 +1,4 @@
-//namespace SunamoRegex._sunamo.SunamoExceptions._AddedToAllCsproj;
+namespace SunamoRegex._sunamo;
 
 internal class SH
 {
