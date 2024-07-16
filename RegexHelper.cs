@@ -1,4 +1,5 @@
 namespace SunamoRegex;
+
 /// <summary>
 /// Most NotTranslateAble class due to many regex and duplicated \
 /// </summary>
