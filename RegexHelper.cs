@@ -91,6 +91,25 @@ public static class RegexHelper
         return r.IsMatch(email);
     }
 
+    public static bool IsValidEmail(string email)
+    {
+        var trimmedEmail = email.Trim();
+
+        if (trimmedEmail.EndsWith("."))
+        {
+            return false;
+        }
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == trimmedEmail;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public static bool IsColor(string entry)
     {
         entry = entry.Trim().TrimStart('#');

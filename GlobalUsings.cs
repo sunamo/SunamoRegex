@@ -11,3 +11,6 @@ global using SunamoRegex._sunamo.SunamoValues;
 global using SunamoRegex._sunamo.SunamoExceptions.OnlyInSE;
 global using System.Diagnostics;
 global using System.Net;
+global using SunamoRegex;
+global using SunamoRegex._sunamo;
+global using SunamoRegex._sunamo.SunamoStringGetLines;
