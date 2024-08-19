@@ -1,31 +1,26 @@
-namespace SunamoRegex;
+﻿namespace SunamoRegex;
 
 /// <summary>
 ///     Represents a wildcard running on the
 ///     <see cref="System.Text.RegularExpressions" /> engine.
+///     Nemůžu to odvodit přímo z Regexu, protože pak předávám wildcard tam kde se očekává regex (předávám to přímo např. do Regex.IsMatch)
+///     Je třeba vytvořit instanci Wildcard
 /// </summary>
-public class Wildcard : Regex
+public class Wildcard //: Regex
 {
-    /// <summary>
-    ///     Initializes a wildcard with the given search pattern.
-    /// </summary>
-    /// <param name="pattern">The wildcard pattern to match.</param>
-    public Wildcard(string pattern)
-        : base(WildcardToRegex(pattern))
+    private Wildcard()
     {
+
     }
 
-    /// <summary>
-    ///     Initializes a wildcard with the given search pattern and options.
-    /// </summary>
-    /// <param name="pattern">The wildcard pattern to match.</param>
-    /// <param name="options">
-    ///     A combination of one or more
-    ///     <see cref="RegexOptions" />.
-    /// </param>
-    public Wildcard(string pattern, RegexOptions options)
-        : base(WildcardToRegex(pattern), options)
+    public static Regex CreateInstance(string pattern)
     {
+        return new Regex(WildcardToRegex(pattern));
+    }
+
+    public static Regex CreateInstance(string pattern, RegexOptions options)
+    {
+        return new Regex(WildcardToRegex(pattern), options);
     }
 
     /// <summary>
@@ -35,6 +30,6 @@ public class Wildcard : Regex
     /// <returns>A regex equivalent of the given wildcard.</returns>
     public static string WildcardToRegex(string pattern)
     {
-        return "^" + Escape(pattern).Replace("\\*", ".*").Replace("\\?", AllStrings.dot) + "$";
+        return "^" + Regex.Escape(pattern).Replace("\\*", ".*").Replace("\\?", AllStrings.dot) + "$";
     }
 }
