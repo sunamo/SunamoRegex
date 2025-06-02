@@ -5,6 +5,8 @@ namespace SunamoRegex;
 /// </summary>
 public static class RegexHelper
 {
+    public static Regex rCzechAccountNumber = new(@"(?:(\d{1,6})-)?(\d{1,10})/(\d{4})", RegexOptions.Compiled);
+
     public static Regex rHtmlScript =
         new(@"<script[^>]*>[\s\S]*?</script>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
