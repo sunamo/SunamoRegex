@@ -157,6 +157,12 @@ public static class RegexHelper
         lastTelephone = null;
         innerText = rWhitespace.Replace(innerText, string.Empty);
         var wasPlus = false;
+
+        if (innerText == "")
+        {
+            return false;
+        }
+
         if (innerText[0] == '+')
         {
             wasPlus = true;
