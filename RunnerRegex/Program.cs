@@ -1,4 +1,4 @@
-﻿using SunamoRegex.Tests;
+using SunamoRegex.Tests;
 
 namespace RunnerRegex;
 
