@@ -1,3 +1,5 @@
+﻿using Xunit;
+
 public class RegexHelperTests
 {
     [Fact]
