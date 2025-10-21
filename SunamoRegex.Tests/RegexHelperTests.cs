@@ -1,4 +1,7 @@
-﻿using System.Text;
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SunamoRegex.Tests;
@@ -74,14 +77,14 @@ https://www.amateri.com/en/user/3081946/Milujuorgazmy - 2878050064/3030
             accountNumbers.Add(match.Value);
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
         foreach (var item in accountNumbers)
         {
-            //sb.AppendLine($"site:https://podvodnabazaru.cz \"{item}\"");
-            sb.AppendLine($"https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fpodvodnabazaru.cz+%22{item}%22");
+            //stringBuilder.AppendLine($"site:https://podvodnabazaru.cz \"{item}\"");
+            stringBuilder.AppendLine($"https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fpodvodnabazaru.cz+%22{item}%22");
         }
 
-        var s = sb.ToString();
+        var text = stringBuilder.ToString();
     }
 }

@@ -1,3 +1,6 @@
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+
 namespace SunamoRegex;
 
 /// <summary>
@@ -89,8 +92,8 @@ public static class RegexHelper
 
     public static bool IsEmail(string email)
     {
-        var r = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-        return r.IsMatch(email);
+        var result = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        return result.IsMatch(email);
     }
 
     public static bool IsValidEmail(string email)
@@ -178,11 +181,11 @@ public static class RegexHelper
         return result;
     }
 
-    public static string SanitizePhone(string s)
+    public static string SanitizePhone(string text)
     {
-        if (string.IsNullOrWhiteSpace(s)) return s;
-        s = s.Replace(" ", "");
-        if (!s.StartsWith("+")) s = "+420" + s;
-        return s;
+        if (string.IsNullOrWhiteSpace(text)) return text;
+        text = text.Replace(" ", "");
+        if (!text.StartsWith("+")) text = "+420" + text;
+        return text;
     }
 }
