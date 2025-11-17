@@ -12,8 +12,10 @@ internal class Program
         //var data = new QuestionMarkTests();
         //data.b();
 
-        var temp = new RegexHelperTests();
-        //temp.CzechAccountNumbersTest();
-        temp.IsTelephoneTest();
+        // EN: Test methods cannot be called directly as they are marked with [Fact] attribute
+        // CZ: Testovací metody nelze volat přímo, protože jsou označeny atributem [Fact]
+        var regexTests = new RegexHelperTests();
+        //regexTests.CzechAccountNumbersTest();
+        //regexTests.IsTelephoneTest();
     }
 }
