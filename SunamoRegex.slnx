@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SunamoRegex.Tests\\SunamoRegex.Tests.csproj" />
+  <Project Path="RunnerRegex\\RunnerRegex.csproj" />
+  <Project Path="SunamoRegex\SunamoRegex.csproj" />
+</Solution>
