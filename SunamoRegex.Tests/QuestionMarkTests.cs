@@ -1,28 +1,41 @@
-// EN: Variable names have been checked and replaced with self-descriptive names
-// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
-
 namespace SunamoRegex.Tests;
+
+/// <summary>
+/// Tests for wildcard question mark matching behavior.
+/// </summary>
 public class QuestionMarkTests
 {
+    /// <summary>
+    /// Tests that a single question mark wildcard matches a single character.
+    /// </summary>
     [Fact]
-    public void a()
+    public void SingleQuestionMarkMatchesSingleCharacter()
     {
-        // všechno bude true
-        //var builder = Wildcard.IsMatch("?", "\\?");
-        //var b2 = Wildcard.IsMatch("??", "\\?");
-        //var b3 = Wildcard.IsMatch("?!", "\\?");
-        //var b4 = Wildcard.IsMatch("!?", "\\?");
-
-
+        var isMatch = Wildcard.IsMatch("?", "?");
+        Assert.True(isMatch);
     }
 
+    /// <summary>
+    /// Tests that a question mark does not match multiple characters.
+    /// </summary>
     [Fact]
-    public void builder()
+    public void QuestionMarkDoesNotMatchMultipleCharacters()
     {
-        // všechno bude true
-        var result = Wildcard.CreateInstance("co*");
-        var b1 = result.IsMatch("11 pokračování s autorizací a jwt tokenem");
-        var b2 = result.IsMatch("co pokračování s autorizací a jwt tokenem");
+        var isMatch = Wildcard.IsMatch("ab", "?");
+        Assert.False(isMatch);
+    }
+
+    /// <summary>
+    /// Tests that a wildcard pattern starting with a prefix matches correctly.
+    /// </summary>
+    [Fact]
+    public void WildcardPatternWithPrefixMatchesCorrectly()
+    {
+        var wildcardRegex = Wildcard.CreateInstance("co*");
+        var isMatchingWithPrefix = wildcardRegex.IsMatch("co pokracovani s autorizaci a jwt tokenem");
+        var isNotMatchingWithoutPrefix = wildcardRegex.IsMatch("11 pokracovani s autorizaci a jwt tokenem");
+
+        Assert.True(isMatchingWithPrefix);
+        Assert.False(isNotMatchingWithoutPrefix);
     }
 }
-

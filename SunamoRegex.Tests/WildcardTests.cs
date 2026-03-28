@@ -1,37 +1,41 @@
-
 using SunamoStringSplit;
 
+/// <summary>
+/// Tests for <see cref="Wildcard"/> pattern matching functionality.
+/// </summary>
 public class WildcardTests
 {
+    /// <summary>
+    /// Tests wildcard matching against a Facebook URL with a path segment.
+    /// </summary>
     [Fact]
     public void WildcardTest()
     {
         var input = @"https://www.facebook.com/name.surname/photos_albums";
-        var wildcard = @"https://www.facebook.com/*/photos_albums";
+        var wildcardPattern = @"https://www.facebook.com/*/photos_albums";
 
-        var wc = Wildcard.CreateInstance(wildcard);
+        var wildcardRegex = Wildcard.CreateInstance(wildcardPattern);
 
-        var regex = Wildcard.WildcardToRegex(wildcard);
-        var matches = SHSplit.SplitAndReturnRegexMatches(input, new System.Text.RegularExpressions.Regex(regex));
+        var regexPattern = Wildcard.WildcardToRegex(wildcardPattern);
+        var matchCollection = SHSplit.SplitAndReturnRegexMatches(input, new System.Text.RegularExpressions.Regex(regexPattern));
 
-        // EN: Verify that wildcard pattern matching works
-        // CZ: Ověření že wildcard pattern matching funguje
-        Assert.True(wc.IsMatch(input));
+        Assert.Matches(wildcardRegex, input);
     }
 
+    /// <summary>
+    /// Tests wildcard matching against an XML tag with a quoted attribute value.
+    /// </summary>
     [Fact]
-    public void WildcardTest1()
+    public void WildcardWithXmlAttributeTest()
     {
         var input = "<M C=\"a\">";
-        var wildcard = @"<M C=""*"">";
+        var wildcardPattern = @"<M C=""*"">";
 
-        var wc = Wildcard.CreateInstance(wildcard);
+        var wildcardRegex = Wildcard.CreateInstance(wildcardPattern);
 
-        var regex = Wildcard.WildcardToRegex(wildcard);
-        var matches = SHSplit.SplitAndReturnRegexMatches(input, new System.Text.RegularExpressions.Regex(regex));
+        var regexPattern = Wildcard.WildcardToRegex(wildcardPattern);
+        var matchCollection = SHSplit.SplitAndReturnRegexMatches(input, new System.Text.RegularExpressions.Regex(regexPattern));
 
-        // EN: Verify that wildcard pattern matching works for XML attributes
-        // CZ: Ověření že wildcard pattern matching funguje pro XML atributy
-        Assert.True(wc.IsMatch(input));
+        Assert.Matches(wildcardRegex, input);
     }
 }

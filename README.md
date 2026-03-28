@@ -1,32 +1,16 @@
 # SunamoRegex
 
-Regex and wildcards helpers
+Regex and wildcard helpers for .NET applications.
 
 ## Overview
 
-SunamoRegex is part of the Sunamo package ecosystem, providing modular, platform-independent utilities for .NET development.
+SunamoRegex is part of the Sunamo package ecosystem, providing modular, platform-independent utilities for .NET development. It includes precompiled regular expressions for common validation tasks and a wildcard pattern matching engine built on top of the .NET Regex class.
 
-## Main Components
+## Key Classes
 
-### Key Classes
-
-- **RegexHelper**
-- **RegexHelperTests**
-- **Wildcard**
-- **WildcardHelper**
-
-### Key Methods
-
-- `IsEmail()`
-- `IsValidEmail()`
-- `IsColor()`
-- `IsYtVideoUri()`
-- `ReplacePlainUrlWithLinks()`
-- `IsUriTest()`
-- `IsMatch()`
-- `CreateInstance()`
-- `WildcardToRegex()`
-- `IsWildcard()`
+- **RegexHelper** - Static helper with precompiled regexes for email, URI, phone number, HTML tag, color code, and GUID validation.
+- **Wildcard** - Converts wildcard patterns (`*` and `?`) to regular expressions and provides matching functionality.
+- **WildcardHelper** - Detects whether a string contains wildcard characters.
 
 ## Installation
 
@@ -34,23 +18,15 @@ SunamoRegex is part of the Sunamo package ecosystem, providing modular, platform
 dotnet add package SunamoRegex
 ```
 
+## Target Frameworks
+
+`net10.0;net9.0;net8.0`
+
 ## Dependencies
 
-- **Microsoft.Extensions.Logging.Abstractions** (v8.0.0)
-- **xunit** (v2.9.3)
-
-## Package Information
-
-- **Package Name**: SunamoRegex
-- **Version**: 25.7.13.1
-- **Target Framework**: net8.0
-- **Category**: Platform-Independent NuGet Package
-- **Source Files**: 9
-
-## Related Packages
-
-This package is part of the Sunamo package ecosystem. For more information about related packages, visit the main repository.
+- **Microsoft.Extensions.Logging.Abstractions**
+- **xunit**
 
 ## License
 
-See the repository root for license information.
+MIT

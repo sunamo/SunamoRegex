@@ -1,101 +1,120 @@
 namespace SunamoRegex;
 
 /// <summary>
-///     Most NotTranslateAble class due to many regex and duplicated \
+/// Provides helper methods and precompiled regular expressions for common text validation
+/// and pattern matching tasks such as email, URL, phone number, and HTML parsing.
 /// </summary>
 public static class RegexHelper
 {
-    public static Regex rCzechAccountNumber = new(@"(?:(\d{1,6})-)?(\d{1,10})/(\d{4})", RegexOptions.Compiled);
+    /// <summary>
+    /// Matches Czech bank account numbers in format [prefix-]account/bankCode.
+    /// </summary>
+    public static Regex CzechAccountNumberRegex { get; set; } =
+        new(@"(?:(\d{1,6})-)?(\d{1,10})/(\d{4})", RegexOptions.Compiled);
 
-    public static Regex rHtmlScript =
+    /// <summary>
+    /// Matches HTML script tags with their content.
+    /// </summary>
+    public static Regex HtmlScriptRegex { get; set; } =
         new(@"<script[^>]*>[\s\S]*?</script>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-    public static Regex rHtmlComment = new(@"<!--[^>]*>[\s\S]*?-->", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    /// <summary>
+    /// Matches HTML comment blocks.
+    /// </summary>
+    public static Regex HtmlCommentRegex { get; set; } =
+        new(@"<!--[^>]*>[\s\S]*?-->", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-    public static Regex rYtVideoLink = new("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)",
-        RegexOptions.Compiled);
+    /// <summary>
+    /// Matches YouTube video links and captures the video ID.
+    /// </summary>
+    public static Regex YtVideoLinkRegex { get; set; } =
+        new("youtu(?:\\.be|be\\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", RegexOptions.Compiled);
 
-    public static Regex rBrTagCaseInsensitive = new(@"<br\s*/?>");
+    /// <summary>
+    /// Matches BR tags in HTML (case insensitive by pattern).
+    /// </summary>
+    public static Regex BrTagCaseInsensitiveRegex { get; set; } = new(@"<br\s*/?>");
 
-    public static Regex rUri = new(@"(https?://[^\s]+)");
+    /// <summary>
+    /// Matches HTTP and HTTPS URIs.
+    /// </summary>
+    public static Regex UriRegex { get; set; } = new(@"(https?://[^\s]+)");
 
-    //static Regex rUriOnlyOutsideTags = new Regex("https?:\/\/[^\s]*|<\/?\w+\b(?=\s|>)(?:='[^']*'|="[^ "]*" |=[^ '"][^\s>]*|[^>])*>|\&nbsp;John|(John)/gi");
-    //static Regex rUriOnlyOutsideTags = new Regex("(text|simple)(?![^<]*>|[^<>]*</)");
-    // cant compile
-    //static Regex rHtmlTag = new Regex(@"(?<==)["']?((?:.(?!["']?\\s+(?:\S+)=|[>"']))+.)["']?");
-    public static Regex rHtmlTag = new("<\\s*([A-Za-z])*?[^>]*/?>");
-    public static Regex rgColor6 = new(@"^(?:[0-9a-fA-F]{3}){1,2}$");
-    public static Regex rgColor8 = new(@"^(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]){2}$");
-    public static Regex rPreTagWithContent = new(@"<\s*pre[^>]*>(.*?)<\s*/\s*pre>", RegexOptions.Multiline);
+    /// <summary>
+    /// Matches HTML tags.
+    /// </summary>
+    public static Regex HtmlTagRegex { get; set; } = new("<\\s*([A-Za-z])*?[^>]*/?>");
 
-    public static Regex isGuid =
-        new(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$",
+    /// <summary>
+    /// Matches 6-character hex color codes.
+    /// </summary>
+    public static Regex Color6Regex { get; set; } = new(@"^(?:[0-9a-fA-F]{3}){1,2}$");
+
+    /// <summary>
+    /// Matches 8-character hex color codes (with alpha channel).
+    /// </summary>
+    public static Regex Color8Regex { get; set; } = new(@"^(?:[0-9a-fA-F]{3}){1,2}(?:[0-9a-fA-F]){2}$");
+
+    /// <summary>
+    /// Matches HTML pre tags with their content.
+    /// </summary>
+    public static Regex PreTagWithContentRegex { get; set; } =
+        new(@"<\s*pre[^>]*>(.*?)<\s*/\s*pre>", RegexOptions.Multiline);
+
+    /// <summary>
+    /// Matches GUID strings with optional braces.
+    /// </summary>
+    public static Regex GuidRegex { get; set; } =
+        new(
+            @"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$",
             RegexOptions.Compiled);
 
-    public static Regex rImgTag = new(@"<img\s+([^>]*)(.*?)[^>]*>");
-    public static Regex rWpImgThumbnail = new(@"(https?:\/\/([^\s]+)-([0-9]*)x([0-9]*).jpg)");
-    public static Regex rNonPairXmlTagsUnvalid = new("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
-    public static readonly Regex rWhitespace = new(@"\s+");
-    public static string lastTelephone;
+    /// <summary>
+    /// Matches HTML img tags.
+    /// </summary>
+    public static Regex ImgTagRegex { get; set; } = new(@"<img\s+([^>]*)(.*?)[^>]*>");
 
-    static RegexHelper()
+    /// <summary>
+    /// Matches WordPress image thumbnail URLs with dimensions.
+    /// </summary>
+    public static Regex WpImgThumbnailRegex { get; set; } =
+        new(@"(https?:\/\/([^\s]+)-([0-9]*)x([0-9]*).jpg)");
+
+    /// <summary>
+    /// Matches non-pair XML tags that may be invalid.
+    /// </summary>
+    public static Regex NonPairXmlTagsUnvalidRegex { get; set; } =
+        new("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>");
+
+    /// <summary>
+    /// Matches one or more whitespace characters.
+    /// </summary>
+    public static readonly Regex WhitespaceRegex = new(@"\s+");
+
+    /// <summary>
+    /// Stores the last validated telephone number after calling <see cref="IsTelephone"/>.
+    /// </summary>
+    public static string? LastTelephone { get; set; }
+
+    /// <summary>
+    /// Determines whether the specified text is a valid email address using regex.
+    /// </summary>
+    /// <param name="text">The text to validate as an email address.</param>
+    /// <returns>True if the text matches the email pattern; otherwise, false.</returns>
+    public static bool IsEmail(string text)
     {
-        // this one I unfortunately cant use because I use .net core 2.0, available from 2.1
-        // from https://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/ and https://gist.github.com/Haacked/7729259
-        ////HtmlTagRegex.
-        //RegexCompilationInfo[] compInfo =
-        //{
-        //        //HtmlTag Regex.
-        //        new RegexCompilationInfo
-        //        (
-        //            @"<"
-        //            +    @"(?<endTag>/)?"    //Captures the / if this is an end tag.
-        //            +    @"(?<tagname>\w+)"    //Captures TagName
-        //            +    @"("                //Groups tag contents
-        //            +        @"(\s+"            //Groups attributes
-        //            +            @"(?<attName>\w+)"  //Attribute name
-        //            +            @"("                //groups =value portion.
-        //            +                @"\s*=\s*"            // =
-        //            +                @"(?:"        //Groups attribute "value" portion.
-        //            +                    @"""(?<attVal>[^""]*)"""    // attVal='double quoted'
-        //            +                    @"|'(?<attVal>[^']*)'"        // attVal='single quoted'
-        //            +                    @"|(?<attVal>[^'"">\s]+)"    // attVal=urlnospaces
-        //            +                @")"
-        //            +            @")?"        //end optional att value portion.
-        //            +        @")+\s*"        //One or more attribute pairs
-        //            +        @"|\s*"            //Some white space.
-        //            +    @")"
-        //            + @"(?<completeTag>/)?>" //Captures the "/" if this is a complete tag.
-        //            , RegexOptions.IgnoreCase
-        //            , "HtmlTagRegex"
-        //            , "Haack.RegularExpressions"
-        //            , true
-        //        )
-        //        ,
-        //        // Matches double words.
-        //        new RegexCompilationInfo
-        //        (
-        //            @"\b(\w+)\s+\1\b"
-        //            , RegexOptions.None
-        //            , "DoubleWordRegex"
-        //            , "Haack.RegularExpressions", true
-        //        )
-        //    };
-        //AssemblyName assemblyName = new AssemblyName();
-        //assemblyName.Name = "Haack.RegularExpressions";
-        //assemblyName.Version = new Version("1.0.0.0");
-        //Regex.CompileToAssembly(compInfo, assemblyName);
+        var emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        return emailRegex.IsMatch(text);
     }
 
-    public static bool IsEmail(string email)
+    /// <summary>
+    /// Determines whether the specified text is a valid email address using <see cref="System.Net.Mail.MailAddress"/>.
+    /// </summary>
+    /// <param name="text">The text to validate as an email address.</param>
+    /// <returns>True if the text is a valid email address; otherwise, false.</returns>
+    public static bool IsValidEmail(string text)
     {
-        var result = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-        return result.IsMatch(email);
-    }
-
-    public static bool IsValidEmail(string email)
-    {
-        var trimmedEmail = email.Trim();
+        var trimmedEmail = text.Trim();
 
         if (trimmedEmail.EndsWith("."))
         {
@@ -103,81 +122,115 @@ public static class RegexHelper
         }
         try
         {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == trimmedEmail;
+            var mailAddress = new System.Net.Mail.MailAddress(text);
+            return mailAddress.Address == trimmedEmail;
         }
-        catch
+        catch (FormatException exception)
         {
+            Console.WriteLine(exception.Message);
             return false;
         }
     }
 
-    public static bool IsColor(string entry)
+    /// <summary>
+    /// Determines whether the specified text is a valid hex color code (6 or 8 characters).
+    /// </summary>
+    /// <param name="text">The text to validate as a hex color code.</param>
+    /// <returns>True if the text is a valid hex color code; otherwise, false.</returns>
+    public static bool IsColor(string text)
     {
-        entry = entry.Trim().TrimStart('#');
-        if (entry.Length == 6)
-            return rgColor6.IsMatch(entry);
-        if (entry.Length == 8) return rgColor8.IsMatch(entry);
+        text = text.Trim().TrimStart('#');
+        if (text.Length == 6)
+            return Color6Regex.IsMatch(text);
+        if (text.Length == 8) return Color8Regex.IsMatch(text);
         return false;
     }
 
+    /// <summary>
+    /// Determines whether the specified text is a YouTube video URI.
+    /// </summary>
+    /// <param name="text">The text to check.</param>
+    /// <returns>True if the text matches a YouTube video URI pattern; otherwise, false.</returns>
     public static bool IsYtVideoUri(string text)
     {
-        return rYtVideoLink.IsMatch(text);
+        return YtVideoLinkRegex.IsMatch(text);
     }
 
     /// <summary>
-    ///     Dont use, parse uri with regex is total naive . Use DOM parser
-    ///     Not working - keep in plain text, use ReplacePlainUrlWithLinks2
+    /// Replaces plain URLs in text with HTML anchor tags.
+    /// Do not use this method - parsing URIs with regex is naive. Use a DOM parser instead.
     /// </summary>
-    /// <param name="plainText"></param>
-    public static string ReplacePlainUrlWithLinks(string plainText)
+    /// <param name="text">The plain text containing URLs to convert.</param>
+    /// <returns>Text with URLs wrapped in anchor tags.</returns>
+    public static string ReplacePlainUrlWithLinks(string text)
     {
-        var html = Regex.Replace(plainText, @"^(http|https|ftp)\://[a-zA-Z0-9\-\.]+" +
+        var html = Regex.Replace(text, @"^(http|https|ftp)\://[a-zA-Z0-9\-\.]+" +
                                             @"\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?" +
                                             @"([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*$",
             "<a href=\"$1\">$1</a>");
         return html;
     }
 
+    /// <summary>
+    /// Determines whether the specified text is an HTTP or HTTPS URI.
+    /// </summary>
+    /// <param name="text">The text to check.</param>
+    /// <returns>True if the text is a valid HTTP/HTTPS URI; otherwise, false.</returns>
     public static bool IsUri(string text)
     {
-        return rUri.IsMatch(text) && (text.StartsWith("http://") || text.StartsWith("https://"));
+        return UriRegex.IsMatch(text) && (text.StartsWith("http://") || text.StartsWith("https://"));
     }
 
-    public static List<string> AllFromGroup(MatchCollection m, int v)
+    /// <summary>
+    /// Extracts all values from a specific capture group across all matches in a collection.
+    /// </summary>
+    /// <param name="matchCollection">The match collection to extract values from.</param>
+    /// <param name="groupIndex">The zero-based index of the capture group to extract.</param>
+    /// <returns>A list of strings from the specified capture group in each match.</returns>
+    public static List<string> AllFromGroup(MatchCollection matchCollection, int groupIndex)
     {
-        var vr = new List<string>(m.Count);
-        foreach (Match item in m) vr.Add(item.Groups[v].Value);
-        return vr;
+        var result = new List<string>(matchCollection.Count);
+        foreach (Match match in matchCollection) result.Add(match.Groups[groupIndex].Value);
+        return result;
     }
 
-    public static bool IsTelephone(string innerText)
+    /// <summary>
+    /// Determines whether the specified text is a valid telephone number.
+    /// Supports formats with optional leading + and 9 or 12 digit numbers.
+    /// The validated number is stored in <see cref="LastTelephone"/>.
+    /// </summary>
+    /// <param name="text">The text to validate as a telephone number.</param>
+    /// <returns>True if the text is a valid telephone number; otherwise, false.</returns>
+    public static bool IsTelephone(string text)
     {
-        lastTelephone = null;
-        innerText = rWhitespace.Replace(innerText, string.Empty);
-        var wasPlus = false;
+        LastTelephone = null;
+        text = WhitespaceRegex.Replace(text, string.Empty);
+        var hadPlusPrefix = false;
 
-        if (innerText == "")
+        if (text == "")
         {
             return false;
         }
 
-        if (innerText[0] == '+')
+        if (text[0] == '+')
         {
-            wasPlus = true;
-            innerText = innerText.Substring(1);
+            hadPlusPrefix = true;
+            text = text.Substring(1);
         }
 
-        if (innerText.Length != 9 && innerText.Length != 12) return false;
-        var result = long.TryParse(innerText, out var ol);
-        if (result) lastTelephone = (wasPlus ? "+" : "") + innerText;
-        if (lastTelephone != null)
-            // sanitize to common format
-            lastTelephone = SanitizePhone(lastTelephone);
-        return result;
+        if (text.Length != 9 && text.Length != 12) return false;
+        var isParsed = long.TryParse(text, out _);
+        if (isParsed) LastTelephone = (hadPlusPrefix ? "+" : "") + text;
+        if (LastTelephone != null)
+            LastTelephone = SanitizePhone(LastTelephone);
+        return isParsed;
     }
 
+    /// <summary>
+    /// Sanitizes a phone number by removing spaces and adding the +420 country code prefix if missing.
+    /// </summary>
+    /// <param name="text">The phone number text to sanitize.</param>
+    /// <returns>The sanitized phone number with country code prefix.</returns>
     public static string SanitizePhone(string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return text;
