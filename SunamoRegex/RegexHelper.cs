@@ -151,10 +151,7 @@ public static class RegexHelper
     /// </summary>
     /// <param name="text">The text to check.</param>
     /// <returns>True if the text matches a YouTube video URI pattern; otherwise, false.</returns>
-    public static bool IsYtVideoUri(string text)
-    {
-        return YtVideoLinkRegex.IsMatch(text);
-    }
+    public static bool IsYtVideoUri(string text) => YtVideoLinkRegex.IsMatch(text);
 
     /// <summary>
     /// Replaces plain URLs in text with HTML anchor tags.
@@ -176,10 +173,8 @@ public static class RegexHelper
     /// </summary>
     /// <param name="text">The text to check.</param>
     /// <returns>True if the text is a valid HTTP/HTTPS URI; otherwise, false.</returns>
-    public static bool IsUri(string text)
-    {
-        return UriRegex.IsMatch(text) && (text.StartsWith("http://") || text.StartsWith("https://"));
-    }
+    public static bool IsUri(string text) =>
+        UriRegex.IsMatch(text) && (text.StartsWith("http://") || text.StartsWith("https://"));
 
     /// <summary>
     /// Extracts all values from a specific capture group across all matches in a collection.
@@ -221,7 +216,7 @@ public static class RegexHelper
         if (text.Length != 9 && text.Length != 12) return false;
         var isParsed = long.TryParse(text, out _);
         if (isParsed) LastTelephone = (hadPlusPrefix ? "+" : "") + text;
-        if (LastTelephone != null)
+        if (LastTelephone is not null)
             LastTelephone = SanitizePhone(LastTelephone);
         return isParsed;
     }

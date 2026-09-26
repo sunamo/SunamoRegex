@@ -10,8 +10,6 @@ public class WildcardHelper
     /// </summary>
     /// <param name="text">The text to check for wildcard characters.</param>
     /// <returns>True if the text contains * or ? characters; otherwise, false.</returns>
-    public static bool IsWildcard(string text)
-    {
-        return text.ToCharArray().Any(character => character == '?') || text.ToCharArray().Any(character => character == '*');
-    }
+    public static bool IsWildcard(string text) =>
+        text.ToCharArray().Any(character => character == '?') || text.ToCharArray().Any(character => character == '*');
 }

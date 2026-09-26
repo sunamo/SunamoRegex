@@ -9,6 +9,6 @@ internal class Program
 {
     static void Main()
     {
-        var regexTests = new RegexHelperTests();
+        _ = new RegexHelperTests();
     }
 }
