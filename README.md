@@ -1,5 +1,10 @@
 # SunamoRegex
 
+## Short description
+
+Pomocné funkce pro regulární výrazy a zástupné znaky, včetně předkompilovaných výrazů. Obsahuje Runner a testy.
+
+
 Regex and wildcard helpers for .NET applications.
 
 ## Overview

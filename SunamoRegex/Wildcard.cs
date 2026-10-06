@@ -1,10 +1,5 @@
 namespace SunamoRegex;
 
-/// <summary>
-/// Provides wildcard pattern matching built on top of the <see cref="System.Text.RegularExpressions.Regex"/> engine.
-/// Cannot be derived directly from Regex because then a wildcard would be passed where a regex is expected.
-/// An instance must be created via <see cref="CreateInstance(string)"/> to ensure proper wildcard-to-regex conversion.
-/// </summary>
 public class Wildcard : Regex
 {
     private Wildcard()

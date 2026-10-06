@@ -2,14 +2,8 @@ namespace SunamoRegex;
 
 using Xunit;
 
-/// <summary>
-/// Basic tests for <see cref="RegexHelper"/> methods within the library project.
-/// </summary>
 public class RegexHelperTests
 {
-    /// <summary>
-    /// Tests that a valid HTTPS URI is correctly identified.
-    /// </summary>
     [Fact]
     public void IsUriTest()
     {

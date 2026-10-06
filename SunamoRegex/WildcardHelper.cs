@@ -1,8 +1,5 @@
 namespace SunamoRegex;
 
-/// <summary>
-/// Provides helper methods for detecting wildcard patterns in strings.
-/// </summary>
 public class WildcardHelper
 {
     /// <summary>
