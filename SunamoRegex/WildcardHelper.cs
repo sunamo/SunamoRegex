@@ -1,5 +1,8 @@
 namespace SunamoRegex;
 
+/// <summary>
+/// Represents the wildcard helper type.
+/// </summary>
 public class WildcardHelper
 {
     /// <summary>
